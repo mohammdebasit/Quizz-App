@@ -1,0 +1,35 @@
+const express = require('express')
+const { testIntro } = require('./models/testIntro')
+const { connectDB, sync } = require('./config/db')
+const testRoutes = require('./routes/testIntroRoutes')
+const { Mcq } = require('./models/Mcqs')
+const mcqRoutes = require('./routes/mcqRoutes')
+const cors = require('cors')
+const authRoutes = require('./routes/authRoutes')
+const { user } = require('./models/user')
+const { result } = require('./models/result')
+const resultRoutes = require('./routes/resultRoutes')
+const app = express()
+const port = 3000
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+testIntro.hasMany(Mcq, { foreignKey: { name: "testIntroId", allowNull: false } })
+Mcq.belongsTo(testIntro, { foreignKey: { name: "testIntroId", allowNull: false } })
+
+user.hasMany(result, { foreignKey: { name: "userId", allowNull: false } })
+result.belongsTo(user, { foreignKey: { name: "userId", allowNull: false } })
+
+testIntro.hasMany(result, { foreignKey: { name: "testIntroId", allowNull: false } })
+result.belongsTo(testIntro, { foreignKey: { name: "testIntroId", allowNull: false } })
+// connectDB()
+// sync()
+app.use('/test', testRoutes)
+app.use('/mcqs', mcqRoutes)
+app.use('/auth', authRoutes)
+app.use('/result', resultRoutes)
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
