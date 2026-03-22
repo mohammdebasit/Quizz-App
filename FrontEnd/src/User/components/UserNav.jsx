@@ -16,7 +16,7 @@ const UserNav = () => {
   }
   return (
     <>
-      <div className='p-5 flex justify-between text-lg text-white bg-[#0D2440]'>
+      <div className='p-5 flex justify-between text-lg text-white bg-[#0D2440] mb-5'>
         <p className='font-semibold'>Quizz App</p>
 
         <nav className='hidden md:flex gap-8'>

@@ -16,14 +16,14 @@ const UdashBoard = () => {
 
   return (
     <>
-      {data.map((e, index) => {
+      {data.reverse().map((e, index) => {
         return <UtestIntro
           key={index}
           id={e.id}
           title={e.title}
           time={e.time}
           description={e.descrip} />
-      }).reverse()}
+      })}
     </>
   )
 }

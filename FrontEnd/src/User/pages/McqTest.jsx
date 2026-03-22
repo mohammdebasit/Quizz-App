@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
+import Cookies from 'js-cookie'
 
 const McqTest = () => {
     const { testId } = useParams()
-
+    const navigate  = useNavigate()
     //a usestate to store and render mcqs which is fetched from api
     const [mcqs, setMcqs] = useState([])
 
@@ -18,6 +19,12 @@ const McqTest = () => {
         getMcqs()
     }, [testId])
 
+    //sending data correc_Count, totalMcq_Count, percentage
+    async function sendData(data) {
+       const res =  await axios.post(`http://localhost:3000/result/${testId}`, data, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
+       console.log(res);
+       
+    }
 
     //to handlecahnge
     //a useRef and function to store the selected choice
@@ -28,15 +35,18 @@ const McqTest = () => {
     }
 
     //to handle submit
-    //a usestate and function to check is the selected answer is coorect
-    const [score, setScore] = useState(0)
+    //a function to check is the selected answer is coorect and after that to send data
     function handleSubmit() {
         let marks = 0
+        let total = mcqs.length
         mcqs.forEach((e, index) => {
-            if (Number(answer.current[index]) == Number(e.correctOp)) marks++
+            if (answer.current[index] === e.correctOp) marks++
         })
-        setScore(marks)
-        console.log(marks);
+        const perc = parseFloat(((marks / total) * 100).toFixed(2))
+        let result = { totalQues: total, correctAsn: marks, percentage: perc }
+        console.log(result);
+        sendData(result)
+        navigate(-1)
     }
 
     return (
@@ -69,14 +79,10 @@ const McqTest = () => {
             })}
 
 
-            <button onClick={() => handleSubmit()} className='self-center w-40  py-2.5 border border-[#2E5E99] text-[#2E5E99] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none '>Submit</button>
+            <button onClick={() => { handleSubmit() }} className='self-center w-40  py-2.5 border border-[#2E5E99] text-[#2E5E99] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none '>Submit</button>
 
         </div>
     )
 }
 
 export default McqTest
-
-
-// admin token
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQmFzaXQiLCJlbWFpbCI6ImJhc2l0MTIzQGdtYWlsLmNvbSIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzczNTcwMzIyfQ.37De3TZ6zNzg84v-u9Y44PCMfk8jqcdBvyapwHoWf1A
