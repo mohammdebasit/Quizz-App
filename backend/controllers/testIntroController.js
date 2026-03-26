@@ -20,31 +20,3 @@ const deleteIntro = async (req, res) => {
 }
 
 module.exports = { getAllIntro, addIntro, deleteIntro }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Description
-// :
-// "qwerty"
-// time
-// :
-// "1234"
-// title
-// :
-// "qwerty"
