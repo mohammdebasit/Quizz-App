@@ -17,35 +17,35 @@ import Registration from '../Auth/Registration';
 
 
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
-  <BrowserRouter>
-    <Routes>
+  <StrictMode>
+    <BrowserRouter>
+      <Routes>
 
       //Authentication
-      <Route path="/login" element={<Login />} />
-      <Route path="/registration" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
 
 
         //Admin Routes
-      <Route element={<AdminLayout />}>
-        <Route path="/" element={<AdashBoard />} />
-        <Route path="/createtest" element={<CreateTest />} />
-        <Route path="/Result" element={<AViewResult />} />
-      </Route>
+        <Route element={<AdminLayout />}>
+          <Route path="/" element={<AdashBoard />} />
+          <Route path="/createtest" element={<CreateTest />} />
+          <Route path="/Result" element={<AViewResult />} />
+        </Route>
 
       //only pages
-      <Route path="/addmcq/:testId" element={<AddMcqs />} />
-      <Route path="/test/:testId" element={<Test />} />
-      <Route path="/testpage/:testId" element={<McqTest />} />
+        <Route path="/addmcq/:testId" element={<AddMcqs />} />
+        <Route path="/test/:testId" element={<Test />} />
+        <Route path="/testpage/:testId" element={<McqTest />} />
 
         //user Routes
-      <Route path='/user' element={<UserLayout />}>
-        <Route index element={<UdashBoard />} />
-        <Route path="result" element={<UViewResult />} />
-      </Route>
+        <Route path='/user' element={<UserLayout />}>
+          <Route index element={<UdashBoard />} />
+          <Route path="result" element={<UViewResult />} />
+        </Route>
 
-    </Routes>
-  </BrowserRouter>
+      </Routes>
+    </BrowserRouter>
 
-  // </StrictMode>,
+  </StrictMode>
 )

@@ -16,7 +16,7 @@ const UdashBoard = () => {
 
   return (
     <>
-      {data.reverse().map((e, index) => {
+      {[...data].reverse().map((e, index) => {
         return <UtestIntro
           key={index}
           id={e.id}

@@ -23,7 +23,7 @@ const AdashBoard = () => {
 
   return (
     <>
-      {data.reverse().map((e, index) => {
+      {[...data].reverse().map((e, index) => {
         return <TestIntro
           key={index}
           id={e.id}

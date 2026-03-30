@@ -22,7 +22,7 @@ const AViewResult = () => {
         <p className="p-2 border-l border-gray-300">Correct Answered</p>
         <p className="p-2 border-l border-gray-300">Percentage</p>
       </section>
-      {result.reverse().map((e, index) => {
+      {[...result].reverse().map((e, index) => {
         return <AdminResult
           key={index}
           testName={e.testIntro.title}

@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
+import Cookies from 'js-cookie';
 
 const UtestIntro = ({ id, title, time, description }) => {
+    const [isAttempt, setAttempt] = useState(true)
     const navigate = useNavigate();
 
     const [formattedTime, setTime] = useState(`00 minutes 00 seconds`)
@@ -15,7 +17,13 @@ const UtestIntro = ({ id, title, time, description }) => {
 
             setTime(`${minutes.toString().padStart(2, '0')} minutes ${seconds.toString().padStart(2, '0')} seconds`)
         }
+
+        async function attempt() {
+            const res = await axios.get(`http://localhost:3000/result/${id}`, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
+            setAttempt(res.data.attempted)
+        }
         fetchTime()
+        attempt()
     }, [])
 
     return (
@@ -38,10 +46,16 @@ const UtestIntro = ({ id, title, time, description }) => {
 
                 <div className="flex gap-3 justify-end">
 
-                    <button onClick={() => { navigate(`/testpage/${id}`) }}
-                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#2E5E99] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
-                        Start Test
-                    </button>
+                    {
+
+                        !isAttempt ? <button onClick={() => { navigate(`/testpage/${id}`) }}
+                            className="flex-1 py-2.5 border border-[#2E5E99] text-[#2E5E99] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
+                            Start Test
+                        </button> : <button
+                            className="flex-1 py-2.5 border border-[#2E5E99] text-[#2E5E99] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
+                            Already Attempeted
+                        </button>
+                    }
                 </div>
 
             </div>
