@@ -37,7 +37,7 @@ const UserNav = () => {
             Dashboard </NavLink>
           <NavLink to="/user/result" className={({ isActive }) => isActive ? "text-[#7BA4D0]" : ""} >
             View Result </NavLink>
-          <button onClick={logOut}>Log Out</button>
+          <button onClick={logOut} className='self-start' >Log Out</button>
         </nav>
       }
     </>

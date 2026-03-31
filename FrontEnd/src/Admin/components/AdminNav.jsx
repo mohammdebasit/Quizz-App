@@ -40,7 +40,7 @@ const AdminNav = () => {
                         Create Test </NavLink>
                     <NavLink to="/Result" className={({ isActive }) => isActive ? "text-[#7BA4D0]" : ""} >
                         View Result </NavLink>
-                    <button onClick={logOut}>Log out</button>
+                    <button onClick={logOut} className='self-start'>Log out</button>
                 </nav>
             }
         </>
