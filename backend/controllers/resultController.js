@@ -34,4 +34,16 @@ const getResult = async (req, res) => {
     }
 }
 
-module.exports = { addResult, getResult }
+const getResultById = async (req, res) => {
+    const { testIntroId } = req.params
+    const UserId = req.user.id
+    const response = await result.findOne({ where: { userId: UserId, testIntroId: testIntroId } })
+    if (response) {
+        return res.json({ attempted: true })
+    } else {
+        return res.json({ attempted: false })
+    }
+}
+
+
+module.exports = { addResult, getResult, getResultById }
