@@ -20,30 +20,30 @@ const TestIntro = ({ id, title, time, description }) => {
 
     return (
         <>
-            <div className="w-[95%] mx-auto  rounded-md shadow-lg/15 p-6 mb-6 md:rounded-none lg:w-[60%] lg:mx-auto ">
+            <div className="w-[95%] mx-auto  rounded-md shadow-lg/15 p-6 mb-6 md:rounded-sm lg:w-[60%] lg:mx-auto ">
 
-                <h3 className="text-lg font-semibold mb-3">
+                <h3 className="text-lg font-semibold mb-3 ">
                     {title}
                 </h3>
 
-                <hr className='hidden md:flex border border-gray-200 ' />
+                <hr className='hidden md:flex border border-gray-300 ' />
 
                 <p className="text-sm text-gray-600 mb-1 md:text-base md:my-6">
-                    <span className="font-medium">Time:</span> {formattedTime}
+                    <span className="font-medium text-[#0D2440]">Time:</span> {formattedTime}
                 </p>
 
-                <p className="text-sm text-gray-500 mb-4 md:text-base md:my-6">
-                    <span className="font-medium">Description:</span> {description}
+                <p className="text-sm text-gray-600 mb-4 md:text-base md:my-6">
+                    <span className="font-medium text-[#0D2440]">Description:</span> {description}
                 </p>
 
                 <div className="flex gap-3 justify-end">
                     <button onClick={() => { navigate(`/addmcq/${id}`) }}
-                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#2E5E99] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
+                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
                         Add Question
                     </button>
 
                     <button onClick={() => { navigate(`/test/${id}`) }}
-                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#2E5E99] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
+                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
                         View Test
                     </button>
                 </div>
