@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
 
 const UtestIntro = ({ id, title, time, description }) => {
+    const [totalSeconds, setTotalSeconds] = useState(0)
     const [isAttempt, setAttempt] = useState(true)
     const navigate = useNavigate();
 
@@ -16,6 +17,8 @@ const UtestIntro = ({ id, title, time, description }) => {
             const seconds = (res.length * time) % 60
 
             setTime(`${minutes.toString().padStart(2, '0')} minutes ${seconds.toString().padStart(2, '0')} seconds`)
+
+            setTotalSeconds(res.length * time)
         }
 
         async function attempt() {
@@ -48,7 +51,7 @@ const UtestIntro = ({ id, title, time, description }) => {
 
                     {
 
-                        !isAttempt ? <button onClick={() => { navigate(`/testpage/${id}`) }}
+                        !isAttempt ? <button onClick={() => { navigate(`/testpage/${id}`, { state: { totalSeconds } }) }}
                             className="flex-1 py-2.5 border border-[#2E5E99] text-[#2E5E99] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
                             Start Test
                         </button> : <button
