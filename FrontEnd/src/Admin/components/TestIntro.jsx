@@ -29,7 +29,7 @@ const TestIntro = ({ id, title, time, description }) => {
                 <hr className='hidden md:flex border border-gray-300 ' />
 
                 <p className="text-sm text-gray-600 mb-1 md:text-base md:my-6">
-                    <span className="font-medium text-[#0D2440]">Time:</span> {formattedTime}
+                    <span className="font-medium text-[#0D2440]">Test-Duration:</span> {formattedTime}
                 </p>
 
                 <p className="text-sm text-gray-600 mb-4 md:text-base md:my-6">

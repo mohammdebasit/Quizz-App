@@ -40,7 +40,7 @@ const UtestIntro = ({ id, title, time, description }) => {
                 <hr className='hidden md:flex border border-gray-300 ' />
 
                 <p className="text-sm text-gray-600 mb-1 md:text-base md:my-6">
-                    <span className="font-medium text-[#0D2440]">Time:</span> {formattedTime}
+                    <span className="font-medium text-[#0D2440]">Test-Duration:</span> {formattedTime}
                 </p>
 
                 <p className="text-sm text-gray-600 mb-4 md:text-base md:my-6">
@@ -49,16 +49,15 @@ const UtestIntro = ({ id, title, time, description }) => {
 
                 <div className="flex gap-3 justify-end">
 
-                    {
-
-                        !isAttempt ? <button onClick={() => { navigate(`/testpage/${id}`, { state: { totalSeconds } }) }}
+                   <button onClick={() => { navigate(`/testpage/${id}`, { state: { totalSeconds } }) }}
                             className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
                             Start Test
-                        </button> : <button
+                        </button> 
+                        {/* : <button
                             className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
                             Already Attempeted
                         </button>
-                    }
+                    } */}
                 </div>
 
             </div>

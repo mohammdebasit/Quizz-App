@@ -52,12 +52,44 @@ const McqTest = () => {
     //a usestate to store and render mcqs which is fetched from api
     const [mcqs, setMcqs] = useState([])
 
+    //Shuffle function
+    function shuffle(params) {
+        const indices = params.map((e, i) => i)
+
+        for (let i = indices.length - 1; i > 0; i--) {
+            const random = Math.floor(Math.random() * (i + 1))
+            const temp = indices[random]
+            indices[random] = indices[i]
+            indices[i] = temp
+        }
+        return indices
+    }
+
     //fetching data
     useEffect(() => {
         async function getMcqs() {
-            const response = await axios.get(`http://localhost:3000/mcqs/${testId}`)
-            setMcqs(response.data)
-            // console.log(response.data);
+            const response = (await axios.get(`http://localhost:3000/mcqs/${testId}`)).data
+
+            const order = JSON.parse(localStorage.getItem('order'))
+
+            if (!order) {
+                const order = shuffle(response)
+                localStorage.setItem('order', JSON.stringify(order))
+
+                const shuffle_Data = order.map((e) => {
+                    return response[e]
+                })
+                setMcqs(shuffle_Data)
+
+            } else {
+
+                const shuffle_Data = order.map((e) => {
+                    return response[e]
+                })
+                setMcqs(shuffle_Data)
+            }
+
+
         }
         getMcqs()
     }, [testId])
@@ -89,6 +121,7 @@ const McqTest = () => {
         let result = { totalQues: total, correctAsn: marks, percentage: perc }
         // console.log(result);
         localStorage.removeItem("endTime")
+        localStorage.removeItem("order")
         sendData(result)
         navigate(-1)
     }
