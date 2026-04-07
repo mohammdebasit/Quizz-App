@@ -49,15 +49,14 @@ const UtestIntro = ({ id, title, time, description }) => {
 
                 <div className="flex gap-3 justify-end">
 
-                   <button onClick={() => { navigate(`/testpage/${id}`, { state: { totalSeconds } }) }}
-                            className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
-                            Start Test
-                        </button> 
-                        {/* : <button
-                            className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
-                            Already Attempeted
-                        </button>
-                    } */}
+                    {!isAttempt ? <button onClick={() => { navigate(`/testpage/${id}`, { state: { totalSeconds } }) }}
+                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
+                        Start Test
+                    </button> : <button
+                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
+                        Already Attempeted
+                    </button>
+                    }
                 </div>
 
             </div>

@@ -8,7 +8,7 @@ const UViewResult = () => {
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get("http://localhost:3000/result", { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
-      console.log(res.data);
+      // console.log(res.data);
       setResult(res.data)
     }
     fetchData()
