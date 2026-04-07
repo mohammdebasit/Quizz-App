@@ -17,6 +17,10 @@ const testIntro = sequelize.define(
             type: DataTypes.TEXT,
             // allowNull defaults to true
         },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+        }
     },
 );
 
