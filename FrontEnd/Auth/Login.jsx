@@ -3,13 +3,14 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
+import BASE_URL from '../src/config';
 
 const Login = () => {
     const navigate = useNavigate()
 
     const [message, setmessage] = useState('')
     async function send(data) {
-        const res = await axios.post('http://localhost:3000/auth/login', data)
+        const res = await axios.post(`${BASE_URL}/auth/login`, data)
         console.log(res.data);
 
         if (res.data.token) {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
 import Cookies from 'js-cookie';
+import BASE_URL from '../../config';
 
 const AddMcqs = () => {
     const { testId } = useParams()
@@ -9,7 +10,7 @@ const AddMcqs = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         const newData = { ...data, testId: testId }
-        await axios.post(`http://localhost:3000/mcqs/${testId}`, newData, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
+        await axios.post(`${BASE_URL}/${testId}`, newData, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
         reset()
         console.log(newData);
     }

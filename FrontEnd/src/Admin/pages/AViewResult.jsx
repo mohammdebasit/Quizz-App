@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import AdminResult from '../components/AdminResult'
+import BASE_URL from '../../config'
 
 const AViewResult = () => {
   const [result, setResult] = useState([])
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get("http://localhost:3000/result", { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
+      const res = await axios.get(`${BASE_URL}/result`, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
       console.log(res.data);
       setResult(res.data)
     }

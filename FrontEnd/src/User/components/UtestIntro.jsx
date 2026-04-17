@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
+import BASE_URL from '../../config';
 
 const UtestIntro = ({ id, title, time, description }) => {
     const [totalSeconds, setTotalSeconds] = useState(0)
@@ -12,7 +13,7 @@ const UtestIntro = ({ id, title, time, description }) => {
     useEffect(() => {
         async function fetchTime() {
 
-            const res = (await axios.get(`http://localhost:3000/mcqs/${id}`)).data
+            const res = (await axios.get(`${BASE_URL}/mcqs/${id}`)).data
             const minutes = Math.floor((res.length * time) / 60)
             const seconds = (res.length * time) % 60
 
@@ -22,7 +23,7 @@ const UtestIntro = ({ id, title, time, description }) => {
         }
 
         async function attempt() {
-            const res = await axios.get(`http://localhost:3000/result/${id}`, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
+            const res = await axios.get(`${BASE_URL}/result/${id}`, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
             setAttempt(res.data.attempted)
         }
         fetchTime()

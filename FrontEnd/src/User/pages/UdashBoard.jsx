@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import UtestIntro from '../components/UtestIntro'
+import BASE_URL from '../../config'
 
 const UdashBoard = () => {
 
@@ -8,7 +9,7 @@ const UdashBoard = () => {
   useEffect(() => {
     async function fetchData() {
       const cookies = await cookieStore.get("token")
-      const res = (await axios.get('http://localhost:3000/test', { headers: { Authorization: `Bearer ${cookies.value}` } })).data
+      const res = (await axios.get(`${BASE_URL}/test`, { headers: { Authorization: `Bearer ${cookies.value}` } })).data
       setdata(res)
     }
     fetchData()

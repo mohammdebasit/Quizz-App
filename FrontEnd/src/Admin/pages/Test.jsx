@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import Cookies from 'js-cookie'
+import BASE_URL from '../../config'
 
 const Test = () => {
 
@@ -11,7 +12,7 @@ const Test = () => {
 
   useEffect(() => {
     async function getMcq() {
-      const res = await axios.get(`http://localhost:3000/mcqs/${testId}`, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
+      const res = await axios.get(`${BASE_URL}/mcqs/${testId}`, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
       console.log(res.data);
 
       setMcqs(res.data)

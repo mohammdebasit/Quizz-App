@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
+import BASE_URL from '../../config';
 
 const TestIntro = ({ id, title, time, description }) => {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ const TestIntro = ({ id, title, time, description }) => {
     useEffect(() => {
         async function fetchTime() {
 
-            const res = (await axios.get(`http://localhost:3000/mcqs/${id}`)).data
+            const res = (await axios.get(`${BASE_URL}/mcqs/${id}`)).data
             const minutes = Math.floor((res.length * time) / 60)
             const seconds = (res.length * time) % 60
 

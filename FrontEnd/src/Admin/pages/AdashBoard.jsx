@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import TestIntro from '../components/TestIntro'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import BASE_URL from '../../config'
 
 const AdashBoard = () => {
 
   const [data, setdata] = useState([])
   useEffect(() => {
     async function fetchData() {
-      const res = (await axios.get('http://localhost:3000/test', {
+      const res = (await axios.get(`${BASE_URL}/test`, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`
         }

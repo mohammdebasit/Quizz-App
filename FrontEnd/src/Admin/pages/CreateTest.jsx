@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import Cookies from 'js-cookie';
+import BASE_URL from '../../config';
 
 const CreateTest = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -13,7 +14,7 @@ const CreateTest = () => {
   };
 
   async function send(params) {
-    const res = await axios.post('http://localhost:3000/test', params ,{headers :{Authorization:`Bearer ${Cookies.get("token")}`}})
+    const res = await axios.post(`${BASE_URL}/test`, params ,{headers :{Authorization:`Bearer ${Cookies.get("token")}`}})
   }
   return (
     <div className='min-h-screen w-full flex flex-col mt-10 p-2 md:p-0'>

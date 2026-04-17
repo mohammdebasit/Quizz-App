@@ -2,11 +2,12 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router';
+import BASE_URL from '../src/config';
 
 const Registration = () => {
     const [message, setmessage] = useState('')
     async function send(data) {
-        const res = await axios.post('http://localhost:3000/auth/register', data)
+        const res = await axios.post(`${BASE_URL}/auth/register`, data)
         console.log(data);
         
         setmessage(res.data.message)

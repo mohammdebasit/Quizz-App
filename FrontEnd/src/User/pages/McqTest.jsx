@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import Cookies from 'js-cookie'
 import { useLocation } from 'react-router'
+import BASE_URL from '../../config'
 
 const McqTest = () => {
     const { testId } = useParams()
@@ -52,7 +53,7 @@ const McqTest = () => {
     //a usestate to store and render mcqs which is fetched from api
     const [mcqs, setMcqs] = useState([])
 
-    //Shuffle function
+    //Shuffle function using Fisher-Yates algorithm+
     function shuffle(params) {
         const indices = params.map((e, i) => i)
 
@@ -68,7 +69,7 @@ const McqTest = () => {
     //fetching data
     useEffect(() => {
         async function getMcqs() {
-            const response = (await axios.get(`http://localhost:3000/mcqs/${testId}`)).data
+            const response = (await axios.get(`${BASE_URL}/mcqs/${testId}`)).data
 
             const order = JSON.parse(localStorage.getItem('order'))
 
@@ -96,7 +97,7 @@ const McqTest = () => {
 
     //sending data correc_Count, totalMcq_Count, percentage
     async function sendData(data) {
-        const res = await axios.post(`http://localhost:3000/result/${testId}`, data, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
+        const res = await axios.post(`${BASE_URL}/result/${testId}`, data, { headers: { Authorization: `Bearer ${Cookies.get("token")}` } })
         console.log(res);
 
     }
