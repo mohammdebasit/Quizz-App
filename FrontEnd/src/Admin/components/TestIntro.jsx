@@ -6,7 +6,8 @@ import BASE_URL from '../../config';
 const TestIntro = ({ id, title, time, description }) => {
     const navigate = useNavigate();
 
-    const [formattedTime, setTime] = useState(`00 minutes 00 seconds`)
+    const [formattedTime, setTime] = useState(`00 min 00 sec`)
+    const [totaques , setques]=useState(0)
     useEffect(() => {
         async function fetchTime() {
 
@@ -14,37 +15,34 @@ const TestIntro = ({ id, title, time, description }) => {
             const minutes = Math.floor((res.length * time) / 60)
             const seconds = (res.length * time) % 60
 
-            setTime(`${minutes.toString().padStart(2, '0')} minutes ${seconds.toString().padStart(2, '0')} seconds`)
+            setques(res.length)
+            setTime(`${minutes.toString().padStart(2, '0')} min ${seconds.toString().padStart(2, '0')} sec`)
         }
         fetchTime()
     }, [])
 
     return (
         <>
-            <div className="w-[95%] mx-auto  rounded-md shadow-lg/15 p-6 mb-6 md:rounded-sm lg:w-[60%] lg:mx-auto ">
+            <div className="m-2 p-2 flex flex-col gap-2 border border-[#7BA4D0] rounded-xl font-sans shadow-lg lg:p-6 lg:gap-3 lg:m-auto lg:my-4 lg:w-[60vw] ">
 
-                <h3 className="text-lg font-semibold mb-3 ">
+                <p className="font-medium text-xl text-[#0D2440] underline underline-offset-5 mb-3">
                     {title}
-                </h3>
-
-                <hr className='hidden md:flex border border-gray-300 ' />
-
-                <p className="text-sm text-gray-600 mb-1 md:text-base md:my-6">
-                    <span className="font-medium text-[#0D2440]">Test-Duration:</span> {formattedTime}
                 </p>
 
-                <p className="text-sm text-gray-600 mb-4 md:text-base md:my-6">
-                    <span className="font-medium text-[#0D2440]">Description:</span> {description}
-                </p>
+                <div className="flex gap-1 items-center"><img src="clock.svg" className='brightness-0 ' /><p className="">{formattedTime}</p></div>
+                <div className="flex gap-1 items-center"><img src="ques.svg" className='brightness-0 ' /><p className="">{totaques} questions</p></div>
+
+                <p className="text-justify"><b className='text-[#0D2440]'>Decription : </b>{description}</p>
+
 
                 <div className="flex gap-3 justify-end">
                     <button onClick={() => { navigate(`/addmcq/${id}`) }}
-                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
+                        className="border rounded-lg w-30 mt-2 p-2.5 px-6 self-end flex justify-center sm:w-40 sm:gap-3 bg-[#2E5E99] text-white hover:bg-white hover:text-[#0D2440] transition duration-300 " >
                         Add Question
                     </button>
 
                     <button onClick={() => { navigate(`/test/${id}`) }}
-                        className="flex-1 py-2.5 border border-[#2E5E99] text-[#0D2440] hover:bg-[#2E5E99] hover:text-white rounded-md transition duration-200 md:flex-none md:w-48" >
+                        className="border rounded-lg w-30 mt-2 p-2.5 px-6 self-end flex justify-center sm:w-40 sm:gap-3 bg-[#2E5E99] text-white hover:bg-white hover:text-[#0D2440] transition duration-300 " >
                         View Test
                     </button>
                 </div>

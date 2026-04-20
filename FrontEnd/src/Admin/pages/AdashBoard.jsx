@@ -15,7 +15,7 @@ const AdashBoard = () => {
         }
       }
       )).data
-      console.log(res);
+      // console.log(res);
 
       setdata(res)
     }
